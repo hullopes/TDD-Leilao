@@ -35,4 +35,15 @@ public class Avaliador {
         return menorLance;
     }
     
+    public double getValorMedio(Leilao leilao){
+        double total = 0.0;
+        List<Lance> lances = leilao.getLances();
+        int i=0;
+        for (Lance lance:lances){
+            total+=lance.getValor();
+            i++;
+        }
+        return total/i;
+    }
+    
 }

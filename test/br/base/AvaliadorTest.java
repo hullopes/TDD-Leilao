@@ -110,4 +110,22 @@ public class AvaliadorTest {
         assertEquals("Erro ao encontrar o menor lance com um só lance", 12.99, avaliador.getMenor(),0.00001);
         assertEquals("Erro ao encontrar o maior lance com um só lance", 12.991, avaliador.getMaior(),0.00001);
     }
+    @Test
+    public void deveCalcularValorMedio3Lances(){
+        //cenário
+        Leilao leilao = new Leilao("Leilão de Um Pastel de Leite Ninho com Nutela dos infernos");
+        
+        Usuario joao = new Usuario("João");
+        Usuario maria= new Usuario("Maria");
+        Usuario pedro= new Usuario("Pedro");
+        leilao.propoe(new Lance(joao, 12.99));
+        leilao.propoe(new Lance(maria, 10.00));
+        leilao.propoe(new Lance(pedro, 5.00));
+        //Execução da ação
+        Avaliador avaliador = new Avaliador();
+        avaliador.avalia(leilao);
+        
+        //Validação
+        assertEquals("Erro ao encontrar o valor médio entre 3 lances", 9.33, avaliador.getValorMedio(leilao),0.001);
+    }
 }
