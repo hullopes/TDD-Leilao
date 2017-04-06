@@ -128,4 +128,16 @@ public class AvaliadorTest {
         //Validação
         assertEquals("Erro ao encontrar o valor médio entre 3 lances", 9.33, avaliador.getValorMedio(leilao),0.001);
     }
+    @Test
+    public void deveEncontrarOsTresMaioresLancesEntreQuatroAleatorios(){
+         //cenário
+        Leilao leilao = new Leilao("Leilão de Um Pastel de Leite Ninho com Nutela dos infernos");
+        
+        Usuario joao = new Usuario("João");
+        Usuario maria= new Usuario("Maria");
+        Usuario pedro= new Usuario("Pedro");
+        leilao.propoe(new Lance(joao, 100.0));
+        leilao.propoe(new Lance(maria, 10.00));
+        leilao.propoe(new Lance(pedro, 5.00));
+    }
 }

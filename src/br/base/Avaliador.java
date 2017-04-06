@@ -17,6 +17,7 @@ import java.util.List;
 public class Avaliador {
      private double menorLance = Double.MAX_VALUE;
      private double maiorLance = Double.MIN_VALUE;
+    private List<Lance> maiores;
      
      public void avalia(Leilao l){
         List<Lance> lances = l.getLances();
@@ -26,7 +27,7 @@ public class Avaliador {
             maiorLance = (lance.getValor()>maiorLance) ? lance.getValor() : maiorLance;
             menorLance = (lance.getValor()<menorLance) ? lance.getValor() : menorLance;
         }
-        
+        pegaOsMaioresLancesNo(l);//pegando os 3 maiores
     }
     public double getMaior(){
         return maiorLance;
@@ -44,6 +45,21 @@ public class Avaliador {
             i++;
         }
         return total/i;
+    }
+    
+    public List<Lance> getTresMaiores(){
+        return this.maiores;
+    }
+
+    private void pegaOsMaioresLancesNo(Leilao l) {
+            maiores = new ArrayList<Lance>(l.getLances());
+            Collections.sort(maiores, new Comparator<Lance>(){
+                public int compare(Lance o1, Lance o2){
+                    if(o1.getValor() < o2.getValor()) return 1;
+                    if(o1.getValor() > o2.getValor()) return -1;
+                    return 0;
+                }
+            });
     }
     
 }
