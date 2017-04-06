@@ -5,6 +5,7 @@
  */
 package br.base;
 
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -139,5 +140,16 @@ public class AvaliadorTest {
         leilao.propoe(new Lance(joao, 100.0));
         leilao.propoe(new Lance(maria, 10.00));
         leilao.propoe(new Lance(pedro, 5.00));
+        leilao.propoe(new Lance(joao, 400.0));
+        
+        Avaliador leiloeiro = new Avaliador();
+        leiloeiro.avalia(leilao);
+        
+        List<Lance> maiores = leiloeiro.getTresMaiores();
+        
+        assertEquals(3, maiores.size());
+        assertEquals(400.00, maiores.get(0).getValor(),0.001);
+        assertEquals(100.00, maiores.get(1).getValor(),0.001);
+        assertEquals(10.00, maiores.get(2).getValor(),0.001);
     }
 }

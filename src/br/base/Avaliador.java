@@ -60,6 +60,8 @@ public class Avaliador {
                     return 0;
                 }
             });
+            //corrigindo o bug para leilões com mais de 3 lances
+            maiores = maiores.subList(0, maiores.size()> 3 ? 3 : maiores.size());            
     }
     
 }
