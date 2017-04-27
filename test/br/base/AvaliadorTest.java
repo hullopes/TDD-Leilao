@@ -6,8 +6,12 @@
 package br.base;
 
 import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -15,6 +19,24 @@ import static org.junit.Assert.*;
  */
 public class AvaliadorTest {
     
+    Avaliador avaliador;
+    
+    @Before
+    public void antes(){
+        this.avaliador = new Avaliador();
+    }
+    @After
+    public void depois(){
+        System.out.println("Depois");
+    }
+    @BeforeClass
+    public static void antesDeTudo(){
+        System.out.println("Antes de tudo");
+    }
+    @AfterClass
+    public static void depoisDeTudo(){
+        System.out.println("Depois de tudo");
+    }
     @Test
     public void deveEntenderLancesEmOrdemCrescente(){
         //cenário
@@ -27,8 +49,7 @@ public class AvaliadorTest {
         leilao.propoe(new Lance(maria, 1.00));
         leilao.propoe(new Lance(pedro, 5.00));
         //Execução da ação
-        Avaliador avaliador = new Avaliador();
-        avaliador.avalia(leilao);
+        this.avaliador.avalia(leilao);
         
         //Validação
         assertEquals("Erro ao encontrar o menor lance crescente", 0.99, avaliador.getMenor(),0.001);
@@ -38,16 +59,25 @@ public class AvaliadorTest {
     @Test
     public void deveEntenderLancesEmOrdemDecrescente(){
         //cenário
-        Leilao leilao = new Leilao("Leilão de Um Pastel de Leite Ninho com Nutela dos infernos");
-        
         Usuario joao = new Usuario("João");
         Usuario maria= new Usuario("Maria");
-        Usuario pedro= new Usuario("Pedro");
-        leilao.propoe(new Lance(joao, 12.99));
-        leilao.propoe(new Lance(maria, 10.00));
-        leilao.propoe(new Lance(pedro, 5.00));
+        Usuario pedro= new Usuario("Pedro");        
+        
+        Leilao leilao = new CriadorDeCenario(new Leilao("")).propoe(new Lance(joao, 12.99)).propoe(new Lance(maria, 10.00))
+                .propoe(new Lance(pedro, 5.00))
+                .constroi();
+        
+//        
+//        Leilao leilao = new Leilao("Leilão de Um Pastel de Leite Ninho com Nutela dos infernos");
+//        
+//        Usuario joao = new Usuario("João");
+//        Usuario maria= new Usuario("Maria");
+//        Usuario pedro= new Usuario("Pedro");
+//        leilao.propoe(new Lance(joao, 12.99));
+//        leilao.propoe(new Lance(maria, 10.00));
+//        leilao.propoe(new Lance(pedro, 5.00));
         //Execução da ação
-        Avaliador avaliador = new Avaliador();
+        this.avaliador.avalia(leilao);
         avaliador.avalia(leilao);
         
         //Validação
